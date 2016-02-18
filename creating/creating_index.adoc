@@ -13,36 +13,32 @@ This chapter will not cover every Dockerfile instruction available but instead
 will focus on specific ones that we want to re-enforce to those who develop
 Dockerfiles.  Docker has published a
 link:https://docs.docker.com/engine/reference/builder/[reference guide] already
-covering each of the Dockerfile instructions.
-
-=== Upstream Docker Best Practices
-
-Upstream docker has a nice description of https://docs.docker.com/engine/articles/dockerfile_best-practices/[best practices] for Dockerfiles. It
-describes the various instructions that can be used to compose a Dockerfile and their best usage.  Familiarize yourself with these
+covering each of the Dockerfile instructions. In addition, upstream docker has a nice description of https://docs.docker.com/engine/articles/dockerfile_best-practices/[best practices] for Dockerfiles. It
+describes the various instructions that can be used to compose a Dockerfile and their best usage. Familiarize yourself with these
 recommendations.
 
-=== Choosing base image
+=== Creating Base Images
+
+==== Choosing Base Image
 
 Every Docker image has its own root filesystem with an operating system installed. So when you want to create a new container, it either has to be based on an image that actually provides an operating system or you will need to create this layer in your image.
-There is a wide variety of base images already available on Docker Hub, so the simplest solution is to use one from there. Here are a few things that should help determine which base image will fit your needs:
+There is a wide variety of base images already available on Docker Hub, so the simplest solution is to use one from there. Here are a few things that should help you determine which base image will fit your needs:
 
-* Linux distribution - Your personal preference and perhaps experience is a reason why to choose a certain distribution rather than another one. However, you should definitely consider whether your containerized application requires specific libraries from a specific system.
+* Linux distribution - Your personal preference and perhaps experience is a reason why to choose a certain distribution rather than another one. However, you should definitely consider whether your containerized application requires specific libraries or tools from a specific system.
 
-* Image size - The base images usually contain a minimal operating system with a set of tools needed for basic operations. To preserve your environment small and efficient, size should also be taken into account when picking the right base image. The size varies; you can take advantage of super small base images, such as 2MB busybox, or use a standard minimal operating system, such as Fedora or CentOS that are up to 200MB in size.
+* Image size - Base images usually contain a minimal operating system with a set of tools needed for basic operations. To preserve your environment small and efficient, size should also be taken into account when picking the right base image. The size varies; you can take advantage of super small base images, such as 2MB busybox, or use a standard minimal operating system, such as Fedora or CentOS that are up to 200MB in size.
 
 * Updates - Not all community images are necessarily rebuilt on a regular basis or when security vulnerabilities are addressed. You should therefore consider using base images from "official repositories" on Docker Hub, and confirm their update policy in advance.
 
 //==== RHEL base images
 
-==== Building your own image
-
-===== Docker Base Image Creation
-
-===== Minimal Operating System
+==== Minimal Operating System
 
 // busybox
 
-=== Creating Component or Application Images ?
+=== Creating Layered Images
+
+==== Creating Component or Application Images
 
 === Create small and concise images
 
