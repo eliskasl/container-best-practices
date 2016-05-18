@@ -267,6 +267,19 @@ For details on logs aggregation, see the https://docs.openshift.org/latest/insta
 
 === Security and User considerations
 
+==== Root privileges on the host
+
+Although running containers as the root user is possible, it is recommended to always run containers as a regular user. This is mainly because of the possibility of container breakouts; if a process breaks out of a running container, it will have the same privileges on the host as it did inside the container. In other words, if you were the root user in the container, you will become the root user on the host.
+
+In the OpenShift environment, using root inside a container can always be disallowed, so you will encounter the following message when using such images:
+
+```
+    * [WARNING] Image "<image>" runs as the 'root' user which may not be permitted by your cluster administrator
+```
+
+
+As of Docker 1.10 user namespaces are supported directly by the docker daemon. This feature allows for the root user in a container to be mapped to a non uid-0 user outside the container, which can help mitigate the risks of container breakout.
+
 ==== Passing credentials and secrets
 
 Storing sensitive data like credentials is a hot topic, especially because Docker does not provide a designated option for storing and passing secret values to containers.
