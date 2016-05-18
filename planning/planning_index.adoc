@@ -278,7 +278,11 @@ In the OpenShift environment, using root inside a container can always be disall
 ```
 
 
-As of Docker 1.10 user namespaces are supported directly by the docker daemon. This feature allows for the root user in a container to be mapped to a non uid-0 user outside the container, which can help mitigate the risks of container breakout.
+NOTE: As of Docker 1.10 user namespaces are supported directly by the docker daemon. This feature allows for the root user in a container to be mapped to a non uid-0 user outside the container, which can help mitigate the risks of container breakout.
+
+===== S2I for building Docker images
+Consider leveraging the S2I utility for building Docker images. Building an image requires the root privileges on the host, which can be exploted. The S2I tool restricts the operations performed as the root user and can run the scripts as a non-root user. For more information see the https://github.com/openshift/source-to-image[github page].
+
 
 ==== Passing credentials and secrets
 
