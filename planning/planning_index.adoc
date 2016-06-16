@@ -277,7 +277,6 @@ In the OpenShift environment, using root inside a container can always be disall
     * [WARNING] Image "<image>" runs as the 'root' user which may not be permitted by your cluster administrator
 ```
 
-
 NOTE: As of Docker 1.10 user namespaces are supported directly by the docker daemon. This feature allows for the root user in a container to be mapped to a non uid-0 user outside the container, which can help mitigate the risks of container breakout.
 
 ===== S2I for building Docker images
@@ -335,9 +334,10 @@ Custodia is an open-source project that defines an API for storing and sharing s
 
 Another open-source project that aims to handle secure accessing and storing of secrets is Vault. Detailed information about the tool and use cases can be found on the https://www.vaultproject.io/intro/index.html[Vault project website].
 
-
 ==== User NameSpace Mapping (docker-1.10 feature)
-==== https://www.openshift.com/promotions/docker-security.html
+
+==== References
+The https://www.openshift.com/promotions/docker-security.html[Docker Security] e-book provides a comprehensive overview of all the aspects that should be considered when securing a system.
 
 === Preventing your image users from filling the filesystem
 
