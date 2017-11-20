@@ -371,7 +371,31 @@ storage integration and configuration control. The deployment platform determine
 scheduling and upgrading. A platform that does not provide these services requires additional work when
 developing the container packaging.
 
-//TBD: flexible contianers
+==== Flexible Containers
+
+To achieve easy, secure and flexible enough deployment of an application, the code, service configuration and additional data such as secrets should not live in the image, but should come from the environment. This can be achieved by mounting volumes with such data or using so called link:#builder_images[builder images], which is especially convenient for more complex scenarios. The source-to-image tools injects your source code or configuration in such an image and produces a ready-to-run application image.
+
+For example, building a containerized Python application then looks as follows:
+
+```
+# s2i build https://github.com/sclorg/s2i-python-container.git --context-dir=3.6/test/setup-test-app/ centos/python-36-centos7 python-sample-app
+
+---snip---
+
+# docker run -p 8080:8080 python-sample-app
+
+---snip---
+
+```
+
+The _s2i_ tool builds a new _python-sample-app_ by adding the configuration from the provided GitHub repository. By running the container, the application is then served on the speficied port.
+
+Configuring an image is then identical, the only difference is that you pass your configuration files instead of source code.
+
+Source-to-image build strategy is supported on a number of major Linux platforms (including Fedora, CentOS and Red Hat Enterprise Linux) and can be used also directly from OpenShift. In case the image of your choice is not s2i-enabled and doesn't support either extending via configuration files or building images from source code, you can add this functionality yourself or override the default behavior. For detailed information on how to create builder image, we recommend you read the following resources:
+
+* https://blog.openshift.com/create-s2i-builder-image/
+* https://github.com/openshift/source-to-image
 
 ==== Platform
 ==== Lifecycle
