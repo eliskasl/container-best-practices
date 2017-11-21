@@ -11,7 +11,7 @@
 Container images generally consist of distribution packages and some scripts that help start the container properly. For example, a container with a MariaDB database typically consists of a set of RPMs, such as mariadb-server, that provides the main functionality, and scripts that handle initialization, setup, etc. A simplified example of MariaDB Dockerfile may look like this:
 [source,Dockerfile]
 ----
-FROM fedora:24
+FROM fedora:26
 
 RUN dnf install -y mariadb-server && \
     dnf clean all && \
@@ -112,6 +112,16 @@ function create_container() {
 create_container test1
 test_image test1
 ----
+
+==== API for Test Creation
+
+If you wan't to cover more complex test scenarios, writing tests in bash might not be the cleanest, easily-scalable, solution. You might want to consider creating your own test API or using one of the existing APIs, such as link:https://github.com/fedora-modularity/conu[Container Utils (conu)]. conu is a low-level  API for testing container images that was tailored precisely to developer needs and it aims to significantly improve the effectivity of writing tests for your images.
+
+==== Generic Sanity Testing
+
+For the needs of high-level sanity testing, such as checking if your container runs on a specific system, you can take advantage of existing tests suites or tools. link:https://github.com/fedora-modularity/meta-test-family[Meta test family] is one of them and provides you out of box with a Dockerfile linter and means of verifying some of your container functions.
+
+
 
 // === Build Testing
 // === Image Scanning
